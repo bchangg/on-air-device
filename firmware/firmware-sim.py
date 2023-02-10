@@ -5,15 +5,17 @@ from machine import Pin
 import dht
 import ujson
 from umqtt.simple import MQTTClient
-
-redLed=machine.Pin(13, Pin.OUT)
+from dotenv import load_dotenv
+import os
+load_dotenv(Path(""))
+redLed=Pin(13, Pin.OUT)
 
 # MQTT Server Parameters
 MQTT_CLIENT_ID = "siumulator-esp32"
 MQTT_SERVER    = "5e390ad9ee8c4ed697aa80acc239403d.s2.eu.hivemq.cloud"
 MQTT_PORT      = 0
-MQTT_USER      = "toairdevice"
-MQTT_PASSWORD  = "Yt7eH_UG9S7LcAE"
+MQTT_USER      = os.getenv('MQTT_USER')
+MQTT_PASSWORD  = os.getenv('MQTT_PASSWORD')
 MQTT_TOPIC     = "light-switch"
 SSL_PARAMS     = {'server_hostname' : '5e390ad9ee8c4ed697aa80acc239403d.s2.eu.hivemq.cloud' }
 
