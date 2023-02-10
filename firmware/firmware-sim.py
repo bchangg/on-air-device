@@ -1,6 +1,5 @@
 import network
 import time
-import machine
 from machine import Pin
 import dht
 import ujson
