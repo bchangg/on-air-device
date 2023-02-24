@@ -7,10 +7,10 @@ on:
 
 jobs:
   rspec:
-    name: RSpec Tests
     defaults:
       run:
         working-directory: "./server"
+    name: RSpec Tests
     runs-on: ubuntu-20.04
     services:
       postgres:
