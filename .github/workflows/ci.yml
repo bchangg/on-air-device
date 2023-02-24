@@ -7,9 +7,6 @@ on:
 
 jobs:
   rspec:
-    defaults:
-      run:
-        working-directory: "./server"
     name: RSpec Tests
     runs-on: ubuntu-20.04
     services:
@@ -27,6 +24,8 @@ jobs:
 
     steps:
       - name: Checkout Repo
+        with:
+          working-directory: "./server"
         uses: actions/checkout@v2
 
       - name: Set Up Ruby and Install Gems
