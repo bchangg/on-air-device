@@ -24,14 +24,13 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        with:
-          working-directory: "./server"
         uses: actions/checkout@v2
 
       - name: Set Up Ruby and Install Gems
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          working-directory: "./server"
 
       - name: Set Up Test Database
         # https://www.postgresql.org/docs/9.3/libpq-envars.html
