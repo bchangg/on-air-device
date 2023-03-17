@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace 'v1' do
       scope 'mqtt' do
-        get 'publish', to: 'mqtt#publish'
+        post 'publish', to: 'mqtt#publish'
       end
     end
   end
