@@ -27,10 +27,10 @@ VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=pycom.P
 
 # Upload scripts
 
-Go to pymakr extensions and connect device
+Go to pymakr extension and connect device
 Make sure you do `cp config_template.py config.py`, and replace placeholders with credentials in config.py
 Right click `main.py`,`boot.py` and `config.py`, select pymakr -> upload to device
 
 # Run scripts
 
-Right click the device and select hard reset. The scripts will be running.:w
+Right click the device and select hard reset. The scripts will be running.
