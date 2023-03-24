@@ -18,6 +18,6 @@ class Api::V1::MqttController < ApplicationController
     render json: {
       success: false,
       message: e
-    }, status: :not_acceptable
+    }, status: :internal_server_error
   end
 end
