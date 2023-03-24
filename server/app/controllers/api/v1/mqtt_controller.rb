@@ -1,7 +1,7 @@
 class Api::V1::MqttController < ApplicationController
   def publish
     MQTT::Client.connect(
-      host: ENV['MQTT_CLUSTER_URL'],
+      host: ENV['MQTT_HOST'],
       username: ENV['MQTT_USERNAME'],
       password: ENV['MQTT_PASSWORD'],
       ssl: true
@@ -11,7 +11,7 @@ class Api::V1::MqttController < ApplicationController
 
     render json: {
       success: true,
-      topic: ENV['MQTT_TOPIC'], 
+      topic: ENV['MQTT_TOPIC'],
       message: ENV['MQTT_MESSAGE']
     }, status: :ok
   rescue => e
