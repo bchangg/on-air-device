@@ -6,12 +6,30 @@ on:
   pull_request:
 
 jobs:
-  rspec:
-    name: RSpec Tests
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      server: ${{ steps.filter.outputs.server }}
+      client: ${{ steps.filter.outputs.client }}
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            server:
+              - 'server/**'
+            client:
+              - 'client/**'
+
+  server:
+    needs: changes
+    if: ${{ needs.changes.outputs.client == 'true'}}
+    name: Server Tests
     defaults:
       run:
         working-directory: "./server"
-    runs-on: ubuntu-20.04
     services:
       postgres:
         image: postgres:13
@@ -24,7 +42,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -45,7 +62,6 @@ jobs:
         run: |
           bundle exec rake db:create
           bundle exec rake db:schema:load
-
       - name: Run RSpec
         env:
           RAILS_ENV: test
@@ -53,3 +69,7 @@ jobs:
           PGPASSWORD: postgres
           PGHOST: localhost
         run: bundle exec rspec spec
+  client:
+    needs: changes
+    if: ${{ needs.changes.outputs.client == 'true'}}
+    run: node -v
