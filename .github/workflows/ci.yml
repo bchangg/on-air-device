@@ -25,7 +25,7 @@ jobs:
 
   server:
     needs: changes
-    if: ${{ needs.changes.outputs.client == 'true'}}
+    if: ${{ needs.changes.outputs.server == 'true'}}
     name: Server Tests
     defaults:
       run:
