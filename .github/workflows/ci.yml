@@ -25,6 +25,7 @@ jobs:
 
   server:
     needs: changes
+    runs-on: ubuntu-latest
     if: ${{ needs.changes.outputs.server == 'true'}}
     name: Server Tests
     defaults:
@@ -78,6 +79,7 @@ jobs:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
   client:
     needs: changes
+    runs-on: ubuntu-latest
     if: ${{ needs.changes.outputs.client == 'true'}}
     name: Client Tests
     defaults:
