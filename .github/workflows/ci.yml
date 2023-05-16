@@ -69,7 +69,35 @@ jobs:
           PGPASSWORD: postgres
           PGHOST: localhost
         run: bundle exec rspec spec
+      - name: Install Railway
+        run: npm i -g @railway/cli
+
+      - name: Deploy
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
   client:
     needs: changes
     if: ${{ needs.changes.outputs.client == 'true'}}
-    run: node -v
+    name: Client Tests
+    defaults:
+      run:
+        working-directory: "./client"
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set Up Next and Install dependencies
+        run: npm i
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm start
+      - name: Install Railway
+        run: npm i -g @railway/cli
+
+      - name: Deploy
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
